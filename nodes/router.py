@@ -105,8 +105,12 @@ def router_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     # Ordering AFTER payment checks
     else:
+        # 🔹 Recommendation queries → menu lookup
+        if re.search(r"\b(recommend|suggest)\b", lu):
+            label = "ordering.lookup"
+
         # list of numbers like "1 and 3"
-        if _NUM_LIST.fullmatch(lu):
+        elif _NUM_LIST.fullmatch(lu):
             label = "ordering.take"; slots = {"has_numbers": "True"}
         # quantities or verbs like add/order/give me/get me/i want
         elif _QTY_NAME.search(lu) or _ADD_VERBS.search(lu) or " order " in f" {lu} ":

@@ -456,5 +456,53 @@
     ],
     "total": 320,
     "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-9c926be1",
+    "ts": 1762350812,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 3
+      }
+    ],
+    "total": 255,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-f1534d8a",
+    "ts": 1762356097,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 425,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-df0e58f2",
+    "ts": 1762356465,
+    "items": [
+      {
+        "id": "A012",
+        "name": "Street Hakka Noodles Chicken",
+        "price": 325.0,
+        "category": "asian_rice_and_noodles",
+        "tags": "asian, noodles, chicken, hakka",
+        "qty": 1
+      }
+    ],
+    "total": 325,
+    "status": "PLACED"
   }
 ]
