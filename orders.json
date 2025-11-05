@@ -504,5 +504,37 @@
     ],
     "total": 325,
     "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-45f90769",
+    "ts": 1762374176,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-45f90769",
+    "ts": 1762374204,
+    "items": [
+      {
+        "id": "NS014",
+        "name": "Chicken 65 Boneless",
+        "price": 365.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, fried, spicy, non_vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 365,
+    "status": "PLACED"
   }
 ]

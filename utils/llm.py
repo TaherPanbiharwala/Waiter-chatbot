@@ -2,12 +2,23 @@
 from __future__ import annotations
 from typing import Dict, Any
 import os, json, requests, re
+from dotenv import load_dotenv
+
+# Make sure .env is loaded even if this module is imported elsewhere first
+load_dotenv(override=True)
 
 _BACKEND    = os.getenv("WAITER_LLM_BACKEND", "ollama").lower()
 _TEMP       = float(os.getenv("WAITER_TEMP", "0.3"))
 _TOP_P      = float(os.getenv("WAITER_TOP_P", "0.9"))
-_OLLAMA_URL = os.getenv("OLLAMA_URL", "http://ollama:11434")
+
+# 🔴 OLD (docker-style default)
+# _OLLAMA_URL = os.getenv("OLLAMA_URL", "http://ollama:11434")
+
+# ✅ NEW (local default)
+_OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434")
 _OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "waiter-gguf:latest")
+
+print("[DEBUG] OLLAMA_URL =", _OLLAMA_URL)
 
 def _ollama_generate(prompt: str, max_tokens: int, *, json_mode: bool = False) -> str:
     """

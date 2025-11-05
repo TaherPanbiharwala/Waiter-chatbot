@@ -1,4 +1,7 @@
 # main.py (text-only with POST /chat and /ws/chat)
+from dotenv import load_dotenv
+load_dotenv(override=True)  # <- make .env win over shell env
+
 import os, pathlib
 from typing import cast, Optional
 
@@ -17,7 +20,6 @@ from state import ChatStateModel, MessageModel, ChatStateTD, to_graph_state, fro
 from utils import db
 
 # ---- startup / env -----------------------------------------
-load_dotenv()
 print("[CFG] USE_WAITER_LLM =", os.getenv("USE_WAITER_LLM"))
 print("[CFG] WAITER_LLM_BACKEND =", os.getenv("WAITER_LLM_BACKEND"))
 
