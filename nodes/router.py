@@ -49,6 +49,10 @@ def _facet_from_text(text: str) -> Dict[str, Any]:
         "category": cat,
     }
 
+_MENU_WORDS = re.compile(
+    r"\b(menu|show.*menu|see.*menu|starters?|mains?|main course|desserts?|drinks?|beverages?)\b",
+    re.I
+)
 
 @validate_node(name="NLU_Router", tags=["router"], input_model=RouterInput, output_model=RouterOutput)
 def router_node(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -57,23 +61,24 @@ def router_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     last_user = next((m.get("content", "") for m in reversed(msgs) if m.get("role") == "user"), "")
     lu = (last_user or "").strip().lower()
+    stage: Optional[str] = (md.get("stage") or "").lower()
 
-    # Exit intent short-circuit (optional)
+    # ---------- 0. Hard exit ----------
     if _EXIT_WORDS.search(lu):
         md["last_intent"] = "app.exit"
         md["route"] = None
         md["stage"] = None
         return state
 
-    # ✅ NEW: derive facets from the user text on every router pass
+    # ---------- 1. Facets from text (for menu filters) ----------
     md["facets"] = _facet_from_text(last_user)
 
-    stage: Optional[str] = md.get("stage")
-
-    # --- Step 1: LLM classification ---
+    # ---------- 2. LLM classification (primary) ----------
     schema_hint = '{"intent": "chitchat", "slots": {}}'
-    system = """
+    system = f"""
     You are an NLU classifier for a restaurant assistant.
+    Current stage: {stage or "none"}.
+
     Valid intents:
       - ordering.lookup   (see menu items)
       - ordering.more     (ask for more options)
@@ -85,63 +90,66 @@ def router_node(state: Dict[str, Any]) -> Dict[str, Any]:
       - payment.pay       (proceed to payment)
       - payment.feedback  (give feedback)
       - chitchat          (small talk, greetings, unrelated chat)
+
+    Rules:
+    - Use ordering.take only when the user wants to add/remove dishes.
+    - Use payment.split when the user asks to split the bill, or when they reply
+      with just a number while we are asking "How many people should I split between?"
+    - Use payment.pay when the user wants to settle/pay.
+    - Use payment.bill when they ask for the bill/total/check.
+    - Use ordering.lookup when they ask to see the menu, items, starters/mains/etc.
     Output ONLY a JSON object with fields: intent (string), slots (object).
     """
     parsed = generate_json(system=system, user=last_user, schema_hint=schema_hint, max_tokens=64)
     label, slots = parsed.get("intent", "chitchat"), parsed.get("slots", {})
-   # --- Step 2: Regex overrides (deterministic first) ---
 
-    # Payment FIRST (and prefer split over bill)
-    if _SPLIT_WORDS.search(lu):
-        label = "payment.split"
-    elif _PAY_WORDS.search(lu):
-        label = "payment.pay"
-    elif _BILL_WORDS.search(lu):
-        label = "payment.bill"
-    elif _FEEDBACK_WORDS.search(lu):
-        label = "payment.feedback"
-    elif _QUIT_WORDS.search(lu):
-        label = "quit"
+    # ---------- 3. Minimal deterministic overrides ----------
 
-    # Ordering AFTER payment checks
-    else:
-        # 🔹 Recommendation queries → menu lookup
-        if re.search(r"\b(recommend|suggest)\b", lu):
-            label = "ordering.lookup"
-
-        # list of numbers like "1 and 3"
-        elif _NUM_LIST.fullmatch(lu):
-            label = "ordering.take"; slots = {"has_numbers": "True"}
-        # quantities or verbs like add/order/give me/get me/i want
-        elif _QTY_NAME.search(lu) or _ADD_VERBS.search(lu) or " order " in f" {lu} ":
-            label = "ordering.take"; slots = {**slots, "has_add": "True"}
-        # explicit remove verbs
-        elif _REMOVE_VERBS.search(lu):
-            label = "ordering.take"; slots = {**slots, "has_remove": "True"}
-
-    # Yes/No confirmations (context-aware)
-    YES_SET = {"yes","y","ok","okay","yeah","yep","confirm","place","proceed"}
-    NO_SET  = {"no","n","nope","nah","cancel","change","not now"}
-
-    if lu in YES_SET:
-        # If we are in/around payment flow, "yes" means proceed to pay
-        if (md.get("stage") in {"split", "payment.gateway", "bill", "payment.bill", "payment.split"} 
-            or label.startswith("payment.")):
-            label = "payment.pay"
-        else:
-            label = "confirm.yes"
-    elif lu in NO_SET:
-        # Only treat as confirm.no if we were confirming; otherwise leave regex/LLM result
-        if md.get("stage") == "confirm" or label.startswith("confirm."):
-            label = "confirm.no"
-
-    # ✅ Feedback “done” detector (works whether you used the form link or not)
+    # 3a. Feedback "done" detector
     if md.get("awaiting_feedback"):
         if _DONE_WORDS.search(lu) or re.search(r"\b[1-5]\b", lu) or re.search(r"\b(thanks|thank you|great|nice)\b", lu):
             md["awaiting_feedback"] = False
             label = "chitchat"
 
-    # --- Step 3: Update state & route ---
+    # 3b. Strong menu words → ordering.lookup
+    if _MENU_WORDS.search(lu):
+        label = "ordering.lookup"
+
+    # 3c. Payment keyword overrides (only the important ones)
+    if _BILL_WORDS.search(lu):
+        label = "payment.bill"
+    if _SPLIT_WORDS.search(lu):
+        label = "payment.split"
+    if _PAY_WORDS.search(lu):
+        label = "payment.pay"
+    if _FEEDBACK_WORDS.search(lu):
+        label = "payment.feedback"
+
+    # 3d. Stage-aware numeric answers
+    if _NUM_LIST.fullmatch(lu):
+        if stage in {"payment.split", "split_pending"}:
+            # numeric reply to "How many people should I split between?"
+            label = "payment.split"
+        elif stage in {"take", "menu"} and not label.startswith("payment."):
+            # picking menu options by number during ordering
+            label = "ordering.take"
+            slots = {**slots, "has_numbers": "True"}
+
+    # 3e. Context-aware yes/no (tiny rule, still useful)
+    YES_SET = {"yes","y","ok","okay","yeah","yep","confirm","place","proceed"}
+    NO_SET  = {"no","n","nope","nah","cancel","change","not now"}
+
+    if lu in YES_SET:
+        # If we're around payment, treat as pay; otherwise confirmation
+        if stage in {"split", "payment.split", "payment.gateway", "payment.bill", "bill"} or label.startswith("payment."):
+            label = "payment.pay"
+        else:
+            label = "confirm.yes"
+    elif lu in NO_SET:
+        if stage == "confirm" or label.startswith("confirm."):
+            label = "confirm.no"
+
+    # ---------- 4. Update metadata / routes ----------
     md["last_intent"] = label
     md["last_slots"] = slots
 
@@ -152,7 +160,7 @@ def router_node(state: Dict[str, Any]) -> Dict[str, Any]:
     else:
         md["route"] = None
 
-    # Stage handling (unchanged)
+    # Stage transitions (same as before, but using final label)
     if label == "quit":
         md["stage"] = None
         return state
