@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Venv / build
+venv/
+.env
+*.egg-info/
+dist/
+build/
+
+# Node / Streamlit caches (if any)
+node_modules/
+.streamlit/
+
+# Data & local artifacts
+redis-data/
+data/
+models/
+*.log
+
+# VCS
+.git
+.gitignore

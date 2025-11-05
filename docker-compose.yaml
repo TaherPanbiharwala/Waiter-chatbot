@@ -1,0 +1,60 @@
+services:
+  ollama:
+    image: taher029/ollama-waiter:latest
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+
+  redis:
+    image: redis:7.2
+    container_name: redis_aiwaiter
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aiwaiter_backend
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    environment:
+      WAITER_LLM_BACKEND: "ollama"
+      OLLAMA_URL: "http://ollama:11434"
+      OLLAMA_MODEL: "waiter-gguf:latest"
+      WAITER_TEMP: "0.3"
+      WAITER_TOP_P: "0.9"
+      USE_WAITER_LLM: "1"
+      REDIS_URL: "redis://redis:6379/0"
+      CORS_ALLOW_ORIGINS: "http://localhost:8501,http://127.0.0.1:8501"
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: aiwaiter_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL_INTERNAL: "http://backend:8000"
+      BACKEND_URL_PUBLIC: "http://localhost:8000"
+    ports:
+      - "8501:8501"

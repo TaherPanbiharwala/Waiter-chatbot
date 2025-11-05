@@ -1,0 +1,14 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only the frontend deps (see next section)
+COPY requirements.frontend.txt /app/requirements.frontend.txt
+RUN python -m pip install --upgrade pip \
+ && pip install --no-cache-dir -r requirements.frontend.txt
+
+# Copy your repo (at least the Streamlit app files)
+COPY . /app
+
+EXPOSE 8501
+CMD ["streamlit", "run", "frontend_app.py", "--server.port=8501", "--server.address=0.0.0.0"]

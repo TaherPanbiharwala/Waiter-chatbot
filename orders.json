@@ -1,0 +1,460 @@
+[
+  {
+    "session_id": "cli",
+    "ts": 1759097443,
+    "items": [
+      {
+        "id": "VS006",
+        "name": "Schezwan Wok Tossed Veg Dry",
+        "price": 320.0,
+        "qty": 1
+      },
+      {
+        "id": "VS008",
+        "name": "Paneer 65",
+        "price": 360.0,
+        "qty": 1
+      }
+    ],
+    "total": 680.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759097467,
+    "items": [
+      {
+        "id": "D001",
+        "name": "Oreo Basque Cheesecake",
+        "price": 385.0,
+        "qty": 1
+      }
+    ],
+    "total": 385.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759099904,
+    "items": [
+      {
+        "id": "VS009",
+        "name": "Mushroom 65",
+        "price": 335.0,
+        "qty": 1
+      },
+      {
+        "id": "NS014",
+        "name": "Chicken 65 Boneless",
+        "price": 365.0,
+        "qty": 1
+      }
+    ],
+    "total": 700.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759100440,
+    "items": [
+      {
+        "id": "VS009",
+        "name": "Mushroom 65",
+        "price": 335.0,
+        "qty": 1
+      },
+      {
+        "id": "NS014",
+        "name": "Chicken 65 Boneless",
+        "price": 365.0,
+        "qty": 1
+      }
+    ],
+    "total": 700.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759105471,
+    "items": [
+      {
+        "id": "NM003",
+        "name": "Meen Vattichathu",
+        "price": 490.0,
+        "qty": 1
+      },
+      {
+        "id": "B001",
+        "name": "Idiyappam (3 pcs)",
+        "price": 165.0,
+        "qty": 3
+      }
+    ],
+    "total": 985.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759105586,
+    "items": [
+      {
+        "id": "NM005",
+        "name": "Yera Manga Kuzhambu",
+        "price": 490.0,
+        "qty": 1
+      },
+      {
+        "id": "NS007",
+        "name": "XO Prawns",
+        "price": 555.0,
+        "qty": 3
+      }
+    ],
+    "total": 2155.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759109711,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 6
+      },
+      {
+        "id": "B014",
+        "name": "Butter Chicken Kulcha",
+        "price": 195.0,
+        "category": "indian_breads",
+        "tags": "bread, kulcha, butter chicken, stuffed",
+        "qty": 2
+      }
+    ],
+    "total": 900.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759109983,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 3
+      }
+    ],
+    "total": 255.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759110976,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 3
+      },
+      {
+        "id": "B014",
+        "name": "Butter Chicken Kulcha",
+        "price": 195.0,
+        "category": "indian_breads",
+        "tags": "bread, kulcha, butter chicken, stuffed",
+        "qty": 1
+      }
+    ],
+    "total": 450.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759118879,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850.0,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759119163,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759119503,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 425,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759119845,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 3
+      },
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 680,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759119935,
+    "items": [
+      {
+        "id": "B001",
+        "name": "Idiyappam (3 pcs)",
+        "price": 165.0,
+        "category": "indian_breads",
+        "tags": "bread, south indian",
+        "qty": 1
+      }
+    ],
+    "total": 165,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759121274,
+    "items": [
+      {
+        "id": "R001",
+        "name": "Steamed Ponni Rice",
+        "price": 100.0,
+        "category": "indian_rice",
+        "tags": "rice, steamed",
+        "qty": 1
+      },
+      {
+        "id": "VM006",
+        "name": "Dal Tadka",
+        "price": 295.0,
+        "category": "main_course",
+        "tags": "vegetarian, main, dal, comfort, vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 395,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759122531,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759126545,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit",
+    "ts": 1759156585,
+    "items": [
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 2
+      }
+    ],
+    "total": 850,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "cli",
+    "ts": 1759357612,
+    "items": [
+      {
+        "id": "VS010",
+        "name": "Gobi 65",
+        "price": 320.0,
+        "category": "starters",
+        "tags": "vegetarian, starter, gobi, fried, spicy, vegetarian",
+        "qty": 1
+      },
+      {
+        "id": "VS008",
+        "name": "Paneer 65",
+        "price": 360.0,
+        "category": "starters",
+        "tags": "vegetarian, starter, paneer, fried, spicy, vegetarian",
+        "qty": 3
+      }
+    ],
+    "total": 1400,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit",
+    "ts": 1759373916,
+    "items": [
+      {
+        "id": "A001",
+        "name": "Burnt Garlic Veg Fried Rice",
+        "price": 260.0,
+        "category": "asian_rice_and_noodles",
+        "tags": "asian, rice, veg",
+        "qty": 1
+      },
+      {
+        "id": "A002",
+        "name": "Schezwan Wok Fried Rice Veg",
+        "price": 260.0,
+        "category": "asian_rice_and_noodles",
+        "tags": "asian, rice, veg, schezwan",
+        "qty": 1
+      },
+      {
+        "id": "A003",
+        "name": "Street Veg Hakka Noodles",
+        "price": 275.0,
+        "category": "asian_rice_and_noodles",
+        "tags": "asian, noodles, veg, hakka",
+        "qty": 1
+      },
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 13
+      },
+      {
+        "id": "NS008",
+        "name": "Chicken Tikka",
+        "price": 425.0,
+        "category": "starters",
+        "tags": "non-vegetarian, starter, chicken, tandoor, non_vegetarian",
+        "qty": 1
+      }
+    ],
+    "total": 2325,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-0ac7017b",
+    "ts": 1759374826,
+    "items": [
+      {
+        "id": "B007",
+        "name": "Butter Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, butter",
+        "qty": 1
+      }
+    ],
+    "total": 85,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-d7ee6299",
+    "ts": 1759377537,
+    "items": [
+      {
+        "id": "B006",
+        "name": "Garlic Naan",
+        "price": 85.0,
+        "category": "indian_breads",
+        "tags": "bread, naan, garlic",
+        "qty": 3
+      }
+    ],
+    "total": 255,
+    "status": "PLACED"
+  },
+  {
+    "session_id": "streamlit-f020b77e",
+    "ts": 1759378434,
+    "items": [
+      {
+        "id": "P001",
+        "name": "Spaghetti Alfredo",
+        "price": 320.0,
+        "category": "pasta",
+        "tags": "pasta, italian, creamy",
+        "qty": 1
+      }
+    ],
+    "total": 320,
+    "status": "PLACED"
+  }
+]

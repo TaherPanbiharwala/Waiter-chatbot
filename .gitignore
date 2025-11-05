@@ -1,0 +1,20 @@
+redis-data
+.env
+test/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.DS_Store
+
+ollama-image/
+
+tests/
+
+# Local databases
+*.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
